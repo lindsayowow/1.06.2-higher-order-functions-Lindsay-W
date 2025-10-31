@@ -1,7 +1,7 @@
 /*
 ===========================================
-🛒 Higher-Order Functions: Product Utilities
-===========================================
+🛒 Higher-Order Functions: Product Utilities'
+'
 
 🎯 Objective:
 Students will create and work with higher-order functions to transform and manipulate data.
@@ -16,13 +16,13 @@ They will:
 // 📦 Starting Dataset: Product List
 // ============================================
 
-const products = [
-  { name: "Laptop", price: 1000, inStock: true },
-  { name: "Phone", price: 500, inStock: false },
-  { name: "Tablet", price: 800, inStock: true },
-  { name: "Monitor", price: 300, inStock: true },
-  { name: "Keyboard", price: 100, inStock: false },
-];
+// const products = [
+//   { name: "Laptop", price: 1000, inStock: true },
+//   { name: "Phone", price: 500, inStock: false },
+//   { name: "Tablet", price: 800, inStock: true },
+//   { name: "Monitor", price: 300, inStock: true },
+//   { name: "Keyboard", price: 100, inStock: false },
+// ];
 
 // ============================================
 // 🔧 Tasks
@@ -91,3 +91,46 @@ Step-by-Step:
 // console.log("Uppercased names:", ...);
 // console.log("Discounted products:", ...);
 // console.log("Total value in stock:", ...);
+
+//-------------------------------------------------------------------------
+// 🔹 
+
+const products = [
+  { name: "Laptop", price: 1000, inStock: true },
+  { name: "Phone", price: 500, inStock: false },
+  { name: "Tablet", price: 800, inStock: true },
+  { name: "Monitor", price: 300, inStock: true },
+  { name: "Keyboard", price: 100, inStock: false },
+];
+
+function filterProducts(array, keyLogic) {
+  return array.filter(keyLogic);
+}
+
+//Task 1: Filter Products by Availability or Price
+const isInStock = array => array.inStock === true;
+console.log("Filtered products in stock: ", filterProducts(products, isInStock));
+
+const lessThanThousand = array => array.price < 1000;
+console.log("Products less than $1,000:  ", filterProducts(products, lessThanThousand));
+
+//Task 2: Transform Product Names
+const productNames = products.map(product => product.name.toUpperCase());
+console.log("Uppercase product names:  ", productNames);
+
+//Task 3: Generate Discounted Prices
+let discountPercent = 10;
+function applyDiscount (discountPercent) {
+  return ((100-discountPercent)/100);
+}
+const discountPrice = products.map(product => product.price * applyDiscount(discountPercent));
+console.log("Discounted Prices:  ", discountPrice);
+
+// Task 4: Calculate Total Inventory Value
+const inStockProducts = filterProducts(products, isInStock);
+const inStockPrices = inStockProducts.map(product => product.price);
+const inventoryValue = inStockPrices.reduce((accumulator, item) => {
+  return accumulator + item;
+});
+
+console.log("Total Inventory Value (In Stock):  $", inventoryValue);
